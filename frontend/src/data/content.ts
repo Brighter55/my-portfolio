@@ -35,7 +35,8 @@ export const site = {
   role: 'Software Engineer · CS Major',
   email: 'sriphrakhunpiyawit@gmail.com', // TODO(owner): real email
   contactEmail: 'sriphrakhunpiyawit@gmail.com', // TODO(owner): real email
-  resumeUrl: 'https://read.cv', // TODO(owner): real resume link
+  /** Local PDF served from frontend/public/ at the site root. */
+  resumeUrl: '/my-resume.pdf',
   linkedinUrl: 'https://www.linkedin.com/in/piyawit-sriphrakhun-a3956335a/', // TODO(owner): verify
   githubUrl: 'https://github.com/Brighter55', // TODO(owner): verify
 } as const

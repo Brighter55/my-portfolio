@@ -1,4 +1,3 @@
-import { ArrowUpRight } from 'lucide-react'
 import { hero } from '@/data/content'
 import { Button } from '@/components/ui/button'
 
@@ -29,10 +28,7 @@ export function Hero() {
               <a href={hero.primaryCta.href}>{hero.primaryCta.label}</a>
             </Button>
             <Button asChild variant="outline" className="h-11 rounded-lg px-6">
-              <a href={hero.secondaryCta.href} target="_blank" rel="noreferrer noopener">
-                {hero.secondaryCta.label}
-                <ArrowUpRight className="size-4" />
-              </a>
+              <a href={hero.secondaryCta.href}>{hero.secondaryCta.label}</a>
             </Button>
           </div>
 

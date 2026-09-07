@@ -20,12 +20,12 @@ export function Footer() {
             className="flex flex-wrap items-center gap-x-7 gap-y-3"
           >
             {footerContent.links.map((link) => {
-              const isMailto = link.href.startsWith('mailto:')
+              const opensNewTab = link.href.startsWith('http')
               return (
                 <a
                   key={link.label}
                   href={link.href}
-                  {...(isMailto ? {} : { target: '_blank', rel: 'noreferrer noopener' })}
+                  {...(opensNewTab ? { target: '_blank', rel: 'noreferrer noopener' } : {})}
                   className="text-[13px] font-medium text-ink-soft underline-offset-4 transition-colors hover:text-ink hover:underline"
                 >
                   {link.label}
