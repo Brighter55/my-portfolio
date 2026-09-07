@@ -29,6 +29,13 @@
   --color-amber: #b85d19;
   --color-beige: #f3f0e6;
 
+  /* Notification-demo console palette (mirrors the Stitch "monolith" set) */
+  --color-tan: #d9b89b;
+  --color-tan-deep: #c8a78a;
+  --color-well: #1b1a17; /* dark order card on the ink board */
+  --color-well-deep: #121210; /* inset customer capsule */
+  --color-well-line: #262522; /* dark hairline */
+
   --shadow-card: 0 1px 2px rgba(20, 20, 19, 0.02), 0 8px 24px rgba(20, 20, 19, 0.05);
   --shadow-float: 0 12px 32px rgba(20, 20, 19, 0.12);
 
