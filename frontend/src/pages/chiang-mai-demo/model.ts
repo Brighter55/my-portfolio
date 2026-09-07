@@ -88,7 +88,7 @@ export const demoCopy = {
   lead: 'Before, every call that went unanswered was a sale lost to a busy kitchen. Now, an AI assistant takes the order conversationally and pushes it straight to the restaurant’s Clover POS.',
   tags: ['Deepgram Nova-3', 'GPT-4o-mini', 'Aura TTS', 'Django Channels'],
   menuHint: 'Here are the sample items you can order with the AI',
-  liveLabel: 'Chiang Mai Thai Kitchen',
+  liveLabel: 'Chiang Mai Restaurant',
   startLabel: 'Talk To Your Agent',
   endLabel: 'End Conversation',
   injectionLabel: 'Customer Speech Injection',
