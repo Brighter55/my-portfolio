@@ -20,6 +20,11 @@
 export const routePaths = {
   /** Interactive SMS pick-up notification simulator (frontend-only demo). */
   notificationDemo: '/demos/notification',
+  /**
+   * Live AI phone-ordering agent demo. Needs the backend/ Deepgram relay
+   * running (see backend/README) — the agent answers over the browser mic.
+   */
+  chiangMaiDemo: '/demos/chiang-mai-ai',
 } as const
 
 export const site = {
@@ -129,9 +134,14 @@ export const projects: Project[] = [
       "Before, every call that went unanswered was a sale lost to a busy kitchen. Now, an AI assistant takes the order conversationally and pushes it straight to the restaurant's Clover POS.",
     ],
     tags: ['Deepgram', 'GPT-4o-mini', 'Twilio', 'Django', 'Clover API'],
-    demo: { label: 'Try Simulator', icon: 'play', href: '#', demo: true },
+    demo: {
+      label: 'Try Simulator',
+      icon: 'play',
+      href: routePaths.chiangMaiDemo,
+      demo: true,
+    },
     image: {
-      src: '/images/projects/ai-phone-agent.jpg',
+      src: '/images/projects/ai-app.png',
       alt: 'Chiang Mai Restaurant AI Phone Agent',
     },
   },

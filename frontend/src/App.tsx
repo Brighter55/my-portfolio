@@ -9,6 +9,7 @@ import {
 import { routePaths } from '@/data/content'
 import { HomePage } from '@/pages/home'
 import NotificationDemoPage from '@/pages/notification-demo'
+import ChiangMaiDemoPage from '@/pages/chiang-mai-demo'
 
 /**
  * After a route change, jump to the hashed section (used by the demo
@@ -41,6 +42,10 @@ function App() {
         <Route
           path={routePaths.notificationDemo}
           element={<NotificationDemoPage />}
+        />
+        <Route
+          path={routePaths.chiangMaiDemo}
+          element={<ChiangMaiDemoPage />}
         />
         {/* Unknown URLs quietly land on the home page (a 404 page can come later). */}
         <Route path="*" element={<Navigate to="/" replace />} />

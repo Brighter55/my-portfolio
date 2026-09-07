@@ -14,4 +14,10 @@ export default defineConfig({
       '@': path.resolve(projectRoot, './src'),
     },
   },
+  server: {
+    proxy: {
+      // Live voice demo: browser <-> backend Django Channels (Deepgram relay).
+      '/ws': { target: 'ws://127.0.0.1:8000', ws: true },
+    },
+  },
 })
