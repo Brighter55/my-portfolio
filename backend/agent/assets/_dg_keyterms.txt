@@ -1,0 +1,20 @@
+# STT phonetic keyterms — trimmed to the three demo menu items.
+# Source: _dg_keyterms.txt from the production repo (master), filtered to
+# Pad Thai, Drunken Noodles, and Chicken Noodle Soup only.
+
+# Pad Thai
+pad thai
+pat thai
+put tie
+pep tai
+pad tie
+pat tai
+
+# Drunken Noodles
+pad kee mao
+pad ki mao
+
+# Chicken Noodle Soup (Kuay Tiew Gai)
+kuay tiew gai
+guay tiew gai
+kuay tiew

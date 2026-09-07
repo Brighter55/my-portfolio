@@ -1,0 +1,117 @@
+/* Voice terminal visuals — ported from the Stitch "AI Phone Agent Demo" screen. */
+
+/* Voice orb ring effects */
+.orb-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 9999px;
+  pointer-events: none;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.orb-ring-1 {
+  border: 3px solid transparent;
+  background: linear-gradient(#141413, #141413) padding-box,
+    linear-gradient(135deg, #a855f7 0%, #ec4899 35%, #06b6d4 70%, #84cc16 100%) border-box;
+  filter: drop-shadow(0 0 14px rgba(192, 132, 252, 0.35));
+}
+
+.orb-ring-2 {
+  border: 2px solid transparent;
+  background: linear-gradient(#141413, #141413) padding-box,
+    linear-gradient(220deg, #3b82f6 10%, #a855f7 50%, #10b981 90%) border-box;
+  opacity: 0.65;
+  transform: scale(0.96) rotate(15deg);
+}
+
+.orb-ring-3 {
+  border: 1.5px solid rgba(167, 139, 250, 0.35);
+  transform: scale(0.91) rotate(-25deg);
+}
+
+/* Active pulsating state */
+.is-active .orb-ring-1 {
+  animation:
+    pulse-spin 7s linear infinite,
+    glow-pulse 2.2s ease-in-out infinite alternate;
+}
+
+.is-active .orb-ring-2 {
+  animation:
+    counter-spin 5s ease-in-out infinite alternate,
+    wave-scale 1.8s ease-in-out infinite alternate;
+  opacity: 0.85;
+}
+
+.is-active .orb-ring-3 {
+  animation: pulse-ring 2.8s cubic-bezier(0.25, 1, 0.5, 1) infinite;
+}
+
+@keyframes pulse-spin {
+  0% {
+    transform: rotate(0deg) scale(1);
+  }
+  50% {
+    transform: rotate(180deg) scale(1.05);
+  }
+  100% {
+    transform: rotate(360deg) scale(1);
+  }
+}
+
+@keyframes counter-spin {
+  0% {
+    transform: rotate(0deg) scale(0.94);
+  }
+  100% {
+    transform: rotate(-180deg) scale(1.02);
+  }
+}
+
+@keyframes glow-pulse {
+  0% {
+    filter: drop-shadow(0 0 14px rgba(168, 85, 247, 0.45)) drop-shadow(0 0 28px rgba(6, 182, 212, 0.25));
+  }
+  100% {
+    filter: drop-shadow(0 0 28px rgba(236, 72, 153, 0.65)) drop-shadow(0 0 45px rgba(52, 211, 153, 0.45));
+  }
+}
+
+@keyframes wave-scale {
+  0% {
+    border-radius: 46% 54% 49% 51% / 53% 47% 53% 47%;
+  }
+  50% {
+    border-radius: 53% 47% 56% 44% / 46% 54% 46% 54%;
+  }
+  100% {
+    border-radius: 48% 52% 45% 55% / 55% 45% 54% 46%;
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    transform: scale(0.88);
+    opacity: 0.3;
+  }
+  50% {
+    transform: scale(1.08);
+    opacity: 0.85;
+  }
+  100% {
+    transform: scale(0.88);
+    opacity: 0.3;
+  }
+}
+
+/* Subtle console scrollbar */
+.terminal-scroll::-webkit-scrollbar {
+  width: 5px;
+}
+.terminal-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+.terminal-scroll::-webkit-scrollbar-thumb {
+  background: #27272a;
+  border-radius: 4px;
+}
