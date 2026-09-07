@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import { ArrowRight, ArrowUpRight, Play } from 'lucide-react'
 import { cn } from '@/lib/utils'
 import { projects, projectsSection, type Project } from '@/data/content'
@@ -38,22 +39,30 @@ function ProjectMedia({ project }: { project: Project }) {
 function DemoPill({ project }: { project: Project }) {
   const action = project.demo!
   const Icon = demoIcon[action.icon]
+  /* Live once the demo ships a real route — see content.ts `demo` docs. */
+  const isLive = action.href !== '#'
   return (
-    /* Inert until the backend/demo milestone — see content.ts `demo` flag. */
     <Button
       asChild
       variant="default"
       className="h-9 rounded-full px-4 text-[13px]"
-      title="Demo ships with the backend milestone"
+      {...(!isLive && { title: 'Demo ships with the backend milestone' })}
     >
-      <a
-        href={action.href}
-        aria-disabled="true"
-        onClick={(event) => event.preventDefault()}
-      >
-        {action.label}
-        <Icon className="size-3.5" />
-      </a>
+      {isLive ? (
+        <Link to={action.href}>
+          {action.label}
+          <Icon className="size-3.5" />
+        </Link>
+      ) : (
+        <a
+          href={action.href}
+          aria-disabled="true"
+          onClick={(event) => event.preventDefault()}
+        >
+          {action.label}
+          <Icon className="size-3.5" />
+        </a>
+      )}
     </Button>
   )
 }

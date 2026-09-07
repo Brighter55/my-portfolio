@@ -13,6 +13,15 @@
  * (ai-phone-ordering, sms-notification, landing-page, corecomp).
  */
 
+/**
+ * Internal route paths — shared by content links and the router (App.tsx)
+ * so each route string lives in exactly one place.
+ */
+export const routePaths = {
+  /** Interactive SMS pick-up notification simulator (frontend-only demo). */
+  notificationDemo: '/demos/notification',
+} as const
+
 export const site = {
   /** Name shown in the header masthead and footer. */
   name: 'Peter Sriphrakhun',
@@ -80,9 +89,10 @@ export interface Project {
   /** Tech tags rendered as mono chips (JetBrains Mono). */
   tags?: string[]
   /**
-   * Demo actions render as pill buttons. `demo: true` marks them inert
-   * (no dead "#" links) until the backend/demo milestone ships them a
-   * real URL. Point `href` there when ready.
+   * Demo actions render as pill buttons on the project card. `href: '#'`
+   * keeps the pill inert (no dead links) until that demo ships a real
+   * URL; any other `href` — e.g. routePaths.notificationDemo — renders
+   * as a working internal link.
    */
   demo?: { label: string; icon: 'arrow' | 'play'; href: string; demo: true }
   /** External link shown as a mono anchor with ↗, e.g. live site / repo. */
@@ -101,7 +111,12 @@ export const projects: Project[] = [
       "Staff can sync recent online orders and notify customers when their food is ready with one click, eliminating the manual process of looking up and typing customer phone numbers.",
     ],
     tags: ['Django', 'React', 'Twilio', 'Clover API', 'PostgreSQL'],
-    demo: { label: 'Launch Demo', icon: 'arrow', href: '#', demo: true },
+    demo: {
+      label: 'Launch Demo',
+      icon: 'arrow',
+      href: routePaths.notificationDemo,
+      demo: true,
+    },
     image: {
       src: '/images/projects/notification-app.jpg',
       alt: 'Chiang Mai Restaurant Pickup Notification App',
