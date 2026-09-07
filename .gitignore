@@ -5,3 +5,6 @@ backend/**/__pycache__/
 backend/db.sqlite3
 *.pyc
 __pycache__/
+
+# Claude Code local git worktrees (full working copies) — never commit these
+.claude/worktrees/

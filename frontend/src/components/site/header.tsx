@@ -1,7 +1,14 @@
 import { useEffect, useState } from 'react'
-import { ChevronDown, Menu } from 'lucide-react'
+import { Link } from 'react-router-dom'
+import {
+  ArrowRight,
+  ArrowUpRight,
+  ChevronDown,
+  Menu,
+  type LucideIcon,
+} from 'lucide-react'
 import { cn } from '@/lib/utils'
-import { nav, projects, site } from '@/data/content'
+import { nav, projects, site, type Project } from '@/data/content'
 import { Button } from '@/components/ui/button'
 import {
   Sheet,
@@ -56,7 +63,74 @@ function Masthead({ className }: { className?: string }) {
   )
 }
 
-/** Desktop hover / focus-within dropdown listing the four project cards. */
+/**
+ * A project's dropdown destination: its demo page (internal route) when it
+ * has one, otherwise its live/external link. Falls back to the on-page card
+ * anchor only if a project has neither (none do today).
+ */
+type ProjectAction =
+  | { kind: 'demo'; href: string; icon: LucideIcon }
+  | { kind: 'external'; href: string; icon: LucideIcon }
+  | { kind: 'section'; href: string; icon?: LucideIcon }
+
+function projectAction(project: Project, index: number): ProjectAction {
+  if (project.demo)
+    return { kind: 'demo', href: project.demo.href, icon: ArrowRight }
+  if (project.external)
+    return { kind: 'external', href: project.external.href, icon: ArrowUpRight }
+  return { kind: 'section', href: `#project-${index + 1}` }
+}
+
+/** One project row, shared by the desktop dropdown and the mobile sheet. */
+function ProjectNavRow({
+  project,
+  index,
+  className,
+}: {
+  project: Project
+  index: number
+  className: string
+}) {
+  const action = projectAction(project, index)
+  const label =
+    action.kind === 'section'
+      ? project.category
+      : action.kind === 'demo'
+        ? 'Demo'
+        : 'Live site'
+  const content = (
+    <>
+      <span className="truncate">{project.title}</span>
+      <span className="label-mono inline-flex shrink-0 items-center gap-1.5 text-ink-faint">
+        {action.kind !== 'section' && <action.icon className="size-3.5" />}
+        {label}
+      </span>
+    </>
+  )
+  if (action.kind === 'demo') {
+    return (
+      <Link
+        to={action.href}
+        className={cn('flex items-center justify-between gap-3', className)}
+      >
+        {content}
+      </Link>
+    )
+  }
+  return (
+    <a
+      href={action.href}
+      {...(action.kind === 'external'
+        ? { target: '_blank', rel: 'noreferrer noopener' }
+        : {})}
+      className={cn('flex items-center justify-between gap-3', className)}
+    >
+      {content}
+    </a>
+  )
+}
+
+/** Desktop hover / focus-within dropdown to the four projects' live pages. */
 function ProjectsDropdown({ active }: { active?: string }) {
   const isActive = active === '#projects'
   return (
@@ -80,15 +154,11 @@ function ProjectsDropdown({ active }: { active?: string }) {
         <ul className="w-[19rem] rounded-xl border border-ink/10 bg-paper p-1.5 shadow-float">
           {projects.map((project, index) => (
             <li key={project.title}>
-              <a
-                href={`#project-${index + 1}`}
-                className="flex items-baseline justify-between gap-3 rounded-lg px-3 py-2.5 text-[13px] font-medium text-ink transition-colors hover:bg-muted"
-              >
-                <span className="truncate">{project.title}</span>
-                <span className="label-mono shrink-0 text-ink-faint">
-                  {project.category}
-                </span>
-              </a>
+              <ProjectNavRow
+                project={project}
+                index={index}
+                className="rounded-lg px-3 py-2.5 text-[13px] font-medium text-ink transition-colors hover:bg-muted"
+              />
             </li>
           ))}
         </ul>
@@ -159,13 +229,12 @@ function MobileNav() {
                     {item.label}
                   </p>
                   {projects.map((project, index) => (
-                    <a
+                    <ProjectNavRow
                       key={project.title}
-                      href={`#project-${index + 1}`}
-                      className="block border-b border-ink/8 py-3 text-[15px] text-ink/80 transition-colors hover:text-ink"
-                    >
-                      {project.title}
-                    </a>
+                      project={project}
+                      index={index}
+                      className="border-b border-ink/8 py-3 text-[15px] text-ink/80 transition-colors hover:text-ink"
+                    />
                   ))}
                 </div>
               )
