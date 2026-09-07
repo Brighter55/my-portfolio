@@ -9,8 +9,16 @@ import type {
   TranscriptLine,
 } from './model'
 
-/** The browser connects here; Vite proxies /ws -> the Django backend (:8000). */
+/**
+ * Where the browser connects for the voice relay.
+ *
+ * Dev: Vite proxies /ws -> the Django backend (:8000), so same-origin works.
+ * Production: the relay usually lives on its own host. Set VITE_RELAY_WS_URL
+ * at build time to point at it, e.g. wss://<backend>/ws/demo/chiang-mai-ai.
+ */
 function socketUrl() {
+  const override = import.meta.env.VITE_RELAY_WS_URL
+  if (override) return override
   const proto = location.protocol === 'https:' ? 'wss:' : 'ws:'
   return `${proto}//${location.host}/ws/demo/chiang-mai-ai`
 }
